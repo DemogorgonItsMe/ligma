@@ -1,0 +1,318 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/naypramx/Ui__Project/Script/XeNonUi", true))()
+library:CreateWatermark("https://discord.gg/T8JA2yNfEU")
+local Nova = library:CreateWindow("Nova",Enum.KeyCode.Insert)
+local player = Nova:CreateTab("Player")
+local Psector1 = player:CreateSector("Teams","left")
+Psector1:AddButton("Inmate",function()
+Workspace.Remote.TeamEvent:FireServer("Bright orange")
+end)
+Psector1:AddButton("Guard",function()
+Workspace.Remote.TeamEvent:FireServer("Bright blue")
+end)
+Psector1:AddButton("Criminal",function()
+weld02 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-919.958, 95.327, 2138.189)
+wait(0.075)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(weld02)
+end)
+Psector1:AddButton("Neutral",function()
+Workspace.Remote.TeamEvent:FireServer("Medium stone grey")
+end)
+local Psector2 = player:CreateSector("Movement","right")
+Psector2:AddSlider("Walkspeed",20,16,300,1,function(s)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Psector2:AddSlider("Jump Power",50,50,500,1,function(j)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = j
+end)
+local Psector3 = player:CreateSector("Other","left")
+Psector3:AddButton("Infinite stamina",function()
+local plr = game:GetService("Players").LocalPlayer
+for i,v in next, getgc() do 
+    if type(v) == "function" and getfenv(v).script and getfenv(v).script == plr.Character.ClientInputHandler then 
+        for i2,v2 in next, debug.getupvalues(v) do 
+            if type(v2) == "number" then 
+                debug.setupvalue(v, i2, math.huge)
+            end
+        end
+    end
+end
+end)
+Psector3:AddButton("Arrest all",function()
+wait(0.1)
+	Player = game.Players.LocalPlayer
+	Pcf = Player.Character.HumanoidRootPart.CFrame
+	for i,v in pairs(game.Teams.Criminals:GetPlayers()) do
+	if v.Name ~= Player.Name then
+	local i = 10
+    repeat
+    wait()
+    i = i-1
+    game.Workspace.Remote.arrest:InvokeServer(v.Character.HumanoidRootPart)
+    Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
+    until i == 0
+end
+end
+end)
+Psector3:AddButton("Kill all",function()
+
+end)
+Psector3:AddButton("Btools",function()
+local tool1 = Instance.new("HopperBin",game.Players.LocalPlayer.Backpack)
+local tool2 = Instance.new("HopperBin",game.Players.LocalPlayer.Backpack)
+local tool3 = Instance.new("HopperBin",game.Players.LocalPlayer.Backpack)
+local tool4 = Instance.new("HopperBin",game.Players.LocalPlayer.Backpack)
+local tool5 = Instance.new("HopperBin",game.Players.LocalPlayer.Backpack)
+tool1.BinType = "Clone"
+tool2.BinType = "GameTool"
+tool3.BinType = "Hammer"
+tool4.BinType = "Script"
+tool5.BinType = "Grab"
+end)
+Psector3:AddButton("Fast respawn",function()
+game.Workspace.Remote.loadchar:InvokeServer(game.Players:GetChildren())
+end)
+local guns = Nova:CreateTab("Items")
+local Gsector1 = guns:CreateSector("Items","left")
+Gsector1:AddButton("Get guns",function()
+local r = workspace.Remote
+local pi = workspace.Prison_ITEMS
+r.ItemHandler:InvokeServer(pi.giver:FindFirstChild("Remington 870").ITEMPICKUP)
+r.ItemHandler:InvokeServer(pi.giver:FindFirstChild("M9").ITEMPICKUP)
+r.ItemHandler:InvokeServer(pi.giver:FindFirstChild("AK-47").ITEMPICKUP)
+r.ItemHandler:InvokeServer(pi.single:FindFirstChild("Hammer").ITEMPICKUP)
+r.ItemHandler:InvokeServer(pi.single:FindFirstChild("Crude Knife").ITEMPICKUP)
+end)
+Gsector1:AddButton("Get M9",function()
+local r = workspace.Remote
+local pi = workspace.Prison_ITEMS
+r.ItemHandler:InvokeServer(pi.giver:FindFirstChild("M9").ITEMPICKUP)
+end)
+Gsector1:AddButton("Get Remington 870",function()
+local r = workspace.Remote
+local pi = workspace.Prison_ITEMS
+r.ItemHandler:InvokeServer(pi.giver:FindFirstChild("Remington 870").ITEMPICKUP)
+end)
+Gsector1:AddButton("Get AK-47",function()
+local r = workspace.Remote
+local pi = workspace.Prison_ITEMS
+r.ItemHandler:InvokeServer(pi.giver:FindFirstChild("AK-47").ITEMPICKUP)
+end)
+Gsector1:AddButton("Get Knife",function()
+local r = workspace.Remote
+local pi = workspace.Prison_ITEMS
+r.ItemHandler:InvokeServer(pi.single:FindFirstChild("Crude Knife").ITEMPICKUP)
+end)
+Gsector1:AddButton("Get hammer",function()
+local r = workspace.Remote
+local pi = workspace.Prison_ITEMS
+r.ItemHandler:InvokeServer(pi.single:FindFirstChild("Hammer").ITEMPICKUP)
+end)
+local Gsector2 = guns:CreateSector("Gun mod","right")
+Gsector2:AddButton("Mod M9",function()
+local backpack = game.Players.LocalPlayer.Backpack
+local a = require(backpack.M9.GunStates)
+while true do
+wait(0.5)
+a.MaxAmmo = math.huge
+a.CurrentAmmo = math.huge
+a.StoredAmmo = math.huge
+a.FireRate = math.huge
+a.Range = math.huge
+a.ReloadTime = math.huge
+a.Spread = 25
+a.AutoFire = true
+wait(0.5)
+end
+end)
+Gsector2:AddButton("Mod Remington 870",function()
+local backpack = game.Players.LocalPlayer.Backpack
+local c = require(backpack["Remington 870"].GunStates)
+while true do
+wait(0.5)
+c.CurrentAmmo = math.huge
+c.StoredAmmo = math.huge
+c.FireRate = math.huge
+c.Range = math.huge
+c.ReloadTime = math.huge
+c.Spread = 100
+c.Bullets = 100
+c.AutoFire = true
+c.MaxAmmo = math.huge
+wait(0.5)
+end
+end)
+Gsector2:AddButton("Mod AK-47",function()
+local backpack = game.Players.LocalPlayer.Backpack
+local c = require(backpack["AK-47"].GunStates)
+while true do
+wait(0.5)
+c.CurrentAmmo = math.huge
+c.StoredAmmo = math.huge
+c.FireRate = math.huge
+c.Range = math.huge
+c.ReloadTime = math.huge
+c.Spread = 100
+c.Bullets = 100
+c.AutoFire = true
+c.MaxAmmo = math.huge
+wait(0.5)
+end
+end)
+Gsector2:AddButton("Mod Taser",function()
+local backpack = game.Players.LocalPlayer.Backpack
+local b = require(backpack.Taser.GunStates)
+while true do
+wait(0.5)
+b.MaxAmmo = math.huge
+b.CurrentAmmo = math.huge
+b.Range = math.huge
+b.ReloadTime = math.huge
+b.Spread = 10
+b.Bullets = 100
+wait(0.5)
+end
+end)
+local mics = Nova:CreateTab("Mics")
+local Msector = mics:CreateSector("Mics","left")
+Msector:AddLabel("Coming soon!")
+local tp = Nova:CreateTab("Teleports")
+local Tsector = tp:CreateSector("Teleports","left")
+Tsector:AddButton("Criminal base",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-943.46,94.13,2063.63)
+end)
+Tsector:AddButton("Prison",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(918.77,100,2379.07)
+end)
+Tsector:AddButton("Yard",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(779.87,98,2458.93)
+end)
+Tsector:AddButton("Armory",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(836.699158, 99.9778671, 2262.0564)
+end)
+Tsector:AddButton("Armory2",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(407.276306, 11.8193684, 1136.11414)
+end)
+Tsector:AddButton("Houses",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-283.122833, 54.1751404, 2482.74854)
+end)
+Tsector:AddButton("Secret",function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-134.400635, 21.2537098, 1373.39539, -0.856387198, -3.4958223e-08, 0.516334116, -6.92979141e-09, 1, 5.62109612e-08, -0.516334116, 4.4560263e-08, -0.856387198)
+end)
+local server = Nova:CreateTab("Server")
+local Ssector1 = server:CreateSector("Server","left")
+Ssector1:AddButton("Rejoin",function()
+local TeleportService = game:GetService("TeleportService")
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+
+    local Rejoin = coroutine.create(function()
+        local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+        end)
+
+        if ErrorMessage and not Success then
+            warn(ErrorMessage)
+        end
+    end)
+coroutine.resume(Rejoin)
+local queue_on_teleport =
+queue_on_teleport or
+    syn and
+        syn.queue_on_teleport [[
+       repeat wait() until game:IsLoaded() wait(5) print("ServerHoped or rejoined")
+       loadstring(game:HttpGet('https://raw.githubusercontent.com/SwordBruhTraveller/Roblox-Lua/main/5V2_ExecutedG5-95.lua'))()]]
+end)
+Ssector1:AddButton("Server hop",function()
+local PlaceID = game.PlaceId
+local AllIDs = {}
+local foundAnything = ""
+local actualHour = os.date("!*t").hour
+local Deleted = false
+local File = pcall(function()
+    AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+end)
+
+if not File then
+    table.insert(AllIDs, actualHour)
+    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+end
+function TPReturner()
+    local Site;
+    if foundAnything == "" then
+        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+    else
+        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+    end
+    local ID = ""
+    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+        foundAnything = Site.nextPageCursor
+    end
+    local num = 0;
+    for i,v in pairs(Site.data) do
+        local Possible = true
+        ID = tostring(v.id)
+        if tonumber(v.maxPlayers) > tonumber(v.playing) then
+            for _,Existing in pairs(AllIDs) do
+                if num ~= 0 then
+                    if ID == tostring(Existing) then
+                        Possible = false
+                    end
+                else
+                    if tonumber(actualHour) ~= tonumber(Existing) then
+                        local delFile = pcall(function()
+                            delfile("NotSameServers.json")
+                            AllIDs = {}
+                            table.insert(AllIDs, actualHour)
+                        end)
+                    end
+                end
+                num = num + 1
+            end
+            if Possible == true then
+                table.insert(AllIDs, ID)
+                wait()
+                pcall(function()
+                    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                    wait()
+                    game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                end)
+                wait(4)
+            end
+        end
+    end
+end
+
+function Teleport()
+    while wait() do
+        pcall(function()
+            TPReturner()
+            if foundAnything ~= "" then
+                TPReturner()
+            end
+        end)
+    end
+end
+Teleport()
+local queue_on_teleport =
+queue_on_teleport or
+    syn and
+        syn.queue_on_teleport [[
+       repeat wait() until game:IsLoaded() wait(5) print("ServerHoped or rejoined")
+       loadstring(game:HttpGet('https://raw.githubusercontent.com/SwordBruhTraveller/Roblox-Lua/main/5V2_ExecutedG5-95.lua'))()]]
+end)
+local credits = Nova:CreateTab("Credits")
+local Csector1 = credits:CreateSector("Developers","left")
+Csector1:AddLabel("Demogorgon#7727-main dev")
+Csector1:AddLabel("Probly#5848-scripts")
+Csector1:AddLabel("Mouad#4819-scripts")
+local Csector2 = credits:CreateSector("Discord","right")
+Csector2:AddLabel("https://discord.gg/T8JA2yNfEU")
+Csector2:AddButton("Copy link",function()
+setclipboard("https://discord.gg/T8JA2yNfEU")
+end)
+local info = Nova:CreateTab("Info")
+local Isector1 = info:CreateSector("Info","left")
+Isector1:AddLabel("toggle button: Insert")
+Isector1:AddLabel("gui version: 1.1")
+Isector1:AddLabel("the gui will be updated")
